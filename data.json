@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "produto": "Laptop",
+        "vendidos": 150
+    },
+    {
+        "id": 2,
+        "produto": "Mouse",
+        "vendidos": 300
+    },
+    {
+        "id": 3,
+        "produto": "Teclado",
+        "vendidos": 250
+    },
+    {
+        "id": 4,
+        "produto": "Monitor",
+        "vendidos": 180
+    },
+    {
+        "id": 5,
+        "produto": "Impressora",
+        "vendidos": 75
+    },
+    {
+        "id": 6,
+        "produto": "Fone de Ouvido",
+        "vendidos": 400
+    },
+    {
+        "id": 7,
+        "produto": "Cadeira de Escritório",
+        "vendidos": 60
+    },
+    {
+        "id": 8,
+        "produto": "Mesa de Escritório",
+        "vendidos": 45
+    },
+    {
+        "id": 9,
+        "produto": "Webcam",
+        "vendidos": 220
+    },
+    {
+        "id": 10,
+        "produto": "Roteador",
+        "vendidos": 190
+    },
+    {
+        "id": 11,
+        "produto": "Pen Drive",
+        "vendidos": 350
+    },
+    {
+        "id": 12,
+        "produto": "HD Externo",
+        "vendidos": 130
+    },
+    {
+        "id": 13,
+        "produto": "Cabo HDMI",
+        "vendidos": 500
+    },
+    {
+        "id": 14,
+        "produto": "Projetor",
+        "vendidos": 85
+    },
+    {
+        "id": 15,
+        "produto": "Tablet",
+        "vendidos": 170
+    },
+    {
+        "id": 16,
+        "produto": "Smartphone",
+        "vendidos": 420
+    },
+    {
+        "id": 17,
+        "produto": "Carregador",
+        "vendidos": 250
+    },
+    {
+        "id": 18,
+        "produto": "Cabo USB",
+        "vendidos": 490
+    },
+    {
+        "id": 19,
+        "produto": "Suporte para Monitor",
+        "vendidos": 80
+    },
+    {
+        "id": 20,
+        "produto": "Notebook",
+        "vendidos": 210
+    },
+    {
+        "id": 21,
+        "produto": "Mochila para Notebook",
+        "vendidos": 130
+    },
+    {
+        "id": 22,
+        "produto": "Adaptador USB",
+        "vendidos": 310
+    },
+    {
+        "id": 23,
+        "produto": "Scanner",
+        "vendidos": 55
+    },
+    {
+        "id": 24,
+        "produto": "Impressora 3D",
+        "vendidos": 40
+    },
+    {
+        "id": 25,
+        "produto": "Estabilizador",
+        "vendidos": 110
+    },
+    {
+        "id": 26,
+        "produto": "Nobreak",
+        "vendidos": 95
+    },
+    {
+        "id": 27,
+        "produto": "Switch",
+        "vendidos": 135
+    },
+    {
+        "id": 28,
+        "produto": "Hub USB",
+        "vendidos": 275
+    },
+    {
+        "id": 29,
+        "produto": "Microfone",
+        "vendidos": 160
+    },
+    {
+        "id": 30,
+        "produto": "Caixa de Som",
+        "vendidos": 320
+    }
+]
