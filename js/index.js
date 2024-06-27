@@ -37,17 +37,38 @@ function Table() {
 
   //body
   const tBody = document.createElement("tbody");
+  tBody.append(TableBody());
 
   tableElement.append(tHeader, tBody);
 
   return tableElement;
 }
 
+function TableBody() {
+  const data = jsonData.getData();
+  console.log(data);
+
+  const tbody = data.map((productInfo) => {
+    const row = document.createElement("tr");
+    const colId = document.createElement("td");
+    const colProduct = document.createElement("td");
+    const colSold = document.createElement("td");
+
+    colId.textContent = `${productInfo.id}`;
+    colProduct.textContent = `${productInfo.produto}`;
+    colSold.textContent = `${productInfo.vendidos}`;
+
+    row.append(colId, colProduct, colSold);
+    return row;
+  });
+  console.log(tbody);
+  return tbody;
+}
+
 function init() {
   const data = jsonData.getData();
+  document.querySelector("body").prepend(Table());
   console.log(data);
 }
 
 requestJson();
-
-document.querySelector("body").prepend(Table());
