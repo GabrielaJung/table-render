@@ -1,3 +1,7 @@
+// import { editJson } from "./utils.js"
+
+import { sortTable } from "./utils.js";
+
 const jsonData = {
   constructor() {
     this.data = {};
@@ -33,6 +37,9 @@ async function requestJson() {
   });
 }
 
+// TODO: try to make a function do update json data
+// ? Ask felps if need to
+
 function Table() {
   const tableElement = document.createElement("table");
 
@@ -44,6 +51,14 @@ function Table() {
   trHeader.insertCell(1).textContent = "Produto";
   trHeader.insertCell(2).textContent = "Quantidade vendida";
 
+  trHeader.cells[0].setAttribute("id", "id");
+  trHeader.cells[1].setAttribute("id", "produto");
+  trHeader.cells[2].setAttribute("id", "vendidos");
+
+  trHeader.addEventListener("click", (e) => {
+    sortTable(e.target.cellIndex);
+    console.log(e.target.id);
+  });
   //body
   const tBody = tableElement.createTBody();
   TableBody({ tBody: tBody });
@@ -68,30 +83,34 @@ function TableBody({ tBody }) {
     colProduct.textContent = productInfo.produto;
     colSold.textContent = productInfo.vendidos;
 
-    // colId.setAttribute("id", productInfo.id);
-    // colProduct.setAttribute("id", productInfo.produto);
-    // colSold.setAttribute("id", productInfo.vendidos);
-
-    // dblclick event listener
-    colId.addEventListener("dblclick", () => {
-      colId.setAttribute("contenteditable", true);
-      editableComponent.setData(colId);
-
-      // console.log(parseInt(colId.textContent));
-    });
+    colId.setAttribute("id", productInfo.id);
 
     colProduct.addEventListener("dblclick", () => {
       colProduct.setAttribute("contenteditable", true);
       editableComponent.setData(colProduct);
 
-      // console.log(colProduct.textContent);
+      // colProduct.addEventListener("input", function () {
+      //   const updatedData = {
+      //     produto: colProduct.textContent,
+      //   };
+      //   editJson(productInfo.id, updatedData, jsonData.getData(), "produto");
+      // });
     });
 
     colSold.addEventListener("dblclick", () => {
       colSold.setAttribute("contenteditable", true);
       editableComponent.setData(colSold);
 
-      // console.log(parseInt(colSold.textContent));
+      // putDataJson("data.json", jsonData.getData()).then((data) => {
+      //   console.log(data); // JSON data parsed by `data.json()` call
+      // });
+
+      // colSold.addEventListener("input", function () {
+      //   const updatedData = {
+      //     vendidos: parseInt(colSold.textContent),
+      //   };
+      //   editJson(productInfo.id, updatedData, jsonData.getData(), "vendidos");
+      // });
     });
 
     // when click out editable component, remove permission to edit it
