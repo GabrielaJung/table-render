@@ -1,0 +1,22 @@
+{
+  "name": "table-render",
+  "version": "1.0.0",
+  "description": "Table-render",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielaJung/studies.git"
+  },
+  "author": "GabrielaJung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielaJung/studies/issues"
+  },
+  "homepage": "https://github.com/GabrielaJung/studies#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
