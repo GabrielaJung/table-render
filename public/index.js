@@ -9,10 +9,18 @@ const jsonData = {
 
   setData(value) {
     this.data = value;
-    debugger;
-    const tableBody = document.querySelector("body").children[0];
-    if (tableBody.tagName === 'TABLE') tableBody.remove();
-    init();
+    const table = document.querySelector("body").children[0];
+    if (table.tagName === "TABLE") {
+      table.children[1].remove();
+
+      const tBody = table.createTBody();
+
+      TableBody({ tBody: tBody });
+
+      table.append(tBody);
+    } else {
+      init();
+    }
   },
 };
 
@@ -43,18 +51,29 @@ function Table() {
   const tHeader = tableElement.createTHead();
   const trHeader = tHeader.insertRow(0);
 
-  trHeader.insertCell(0).textContent = "ID";
+  const colIdHeader = trHeader.insertCell(0);
   const colProductHeader = trHeader.insertCell(1);
   const colSoldHeader = trHeader.insertCell(2);
 
+  colIdHeader.textContent = "ID";
   colProductHeader.textContent = "Produto";
   colSoldHeader.textContent = "Quantidade vendida";
 
-  colProductHeader.addEventListener("click", () => {
-    orderTable(tableElement, 1);
-  });
-  colSoldHeader.addEventListener("click", () => {
-    orderTable(tableElement, 2);
+  colIdHeader.setAttribute("className", "asc");
+
+  trHeader.childNodes.forEach((cell, index) => {
+    cell.onclick = () => {
+      const order = changeColOrder(cell.getAttribute("classname"));
+
+      trHeader.childNodes.forEach((headerCell) => {
+        if (headerCell === cell) return;
+        headerCell.removeAttribute("classname");
+      });
+
+      cell.setAttribute("className", order);
+
+      orderTable(index, order);
+    };
   });
 
   //body
@@ -68,7 +87,6 @@ function Table() {
 
 function TableBody({ tBody }) {
   const data = jsonData.getData();
-  console.log(data);
 
   data.forEach((productInfo, index) => {
     const row = tBody.insertRow(index);
@@ -81,39 +99,35 @@ function TableBody({ tBody }) {
     colProduct.textContent = productInfo.produto;
     colSold.textContent = productInfo.vendidos;
 
-    // colId.setAttribute("id", productInfo.id);
-    // colProduct.setAttribute("id", productInfo.produto);
-    // colSold.setAttribute("id", productInfo.vendidos);
-
     // dblclick event listener
     colId.addEventListener("dblclick", () => {
       colId.setAttribute("contenteditable", true);
       editableComponent.setData(colId);
-
-      // console.log(parseInt(colId.textContent));
     });
 
     colProduct.addEventListener("dblclick", () => {
       colProduct.setAttribute("contenteditable", true);
       editableComponent.setData(colProduct);
-
-      // console.log(colProduct.textContent);
     });
 
     colSold.addEventListener("dblclick", () => {
       colSold.setAttribute("contenteditable", true);
       editableComponent.setData(colSold);
-
-      // console.log(parseInt(colSold.textContent));
     });
 
     // when click out editable component, remove permission to edit it
     document.onclick = function (e) {
       const editableCell = editableComponent.getData();
       if (!editableCell) return;
+
       if (e.target !== editableCell) {
         editableCell.setAttribute("contenteditable", false);
         editableComponent.setData(null);
+
+        // todo: fazer aqui o salvamento do dado
+
+        const id = parseInt(editableCell.parentNode.cells.item(0).textContent);
+        console.log(id);
       }
     };
   });
@@ -121,27 +135,35 @@ function TableBody({ tBody }) {
 }
 
 function init() {
-  // const data = jsonData.getData();
   document.querySelector("body").prepend(Table());
 }
 
-function orderTable(table, col) {
+function orderTable(col, order) {
   const unorderedData = jsonData.getData();
-  console.log(unorderedData);
 
-  // let sortedData;
   if (col === 1) {
-    jsonData.setData(
-      [...unorderedData].sort((a, b) => a.produto.localeCompare(b.produto))
+    const orderedData = [...unorderedData].sort((a, b) =>
+      a.produto.localeCompare(b.produto)
     );
-  } else if (col === 2) {
-    jsonData.setData(
-      [...unorderedData].sort((a, b) => a.vendidos - b.vendidos)
-    );
+    jsonData.setData(order === "asc" ? orderedData : orderedData.reverse());
+  } else {
+    const orderedData = [...unorderedData].sort((a, b) => {
+      const aCol = col === 0 ? a.id : a.vendidos;
+      const bCol = col === 0 ? b.id : b.vendidos;
+      return aCol - bCol;
+    });
+    jsonData.setData(order === "asc" ? orderedData : orderedData.reverse());
+  }
+}
+
+function changeColOrder(order) {
+  // const order = col.getAttribute("className");
+
+  if (!order || order === "desc") {
+    return "asc";
   }
 
-  console.log(jsonData.getData());
-  console.log(table);
+  return "desc";
 }
 
 requestJson();
